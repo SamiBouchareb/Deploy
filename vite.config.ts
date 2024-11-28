@@ -7,7 +7,7 @@ export default defineConfig({
   base: '/Degos/',
   build: {
     outDir: 'dist',
-    minify: 'terser',
+    minify: 'esbuild',
     sourcemap: false,
     emptyOutDir: true,
     rollupOptions: {
