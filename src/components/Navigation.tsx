@@ -30,6 +30,31 @@ export function Navigation() {
     dispatch({ type: 'TOGGLE_CART' });
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsOpen(false); // Close mobile menu if open
+
+    if (href === '#') {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+      return;
+    }
+
+    const element = document.querySelector(href);
+    if (element) {
+      const offset = 80; // Height of fixed navbar
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white shadow-lg' : 'bg-transparent'
@@ -38,11 +63,15 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <span className={`text-xl md:text-2xl font-bold transition-colors ${
-              isScrolled ? 'text-green-800' : 'text-white'
-            }`}>
+            <a 
+              href="#" 
+              onClick={(e) => handleNavClick(e, '#')}
+              className={`text-xl md:text-2xl font-bold transition-colors ${
+                isScrolled ? 'text-green-800' : 'text-white'
+              }`}
+            >
               Dago
-            </span>
+            </a>
           </div>
 
           {/* Desktop Navigation */}
@@ -51,6 +80,7 @@ export function Navigation() {
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`transition-colors hover:text-green-500 ${
                   isScrolled ? 'text-gray-700' : 'text-white'
                 }`}
@@ -110,6 +140,7 @@ export function Navigation() {
               <a
                 key={link.label}
                 href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
                 className={`block px-4 py-2 transition-colors ${
                   isScrolled
                     ? 'text-gray-700 hover:bg-gray-100'

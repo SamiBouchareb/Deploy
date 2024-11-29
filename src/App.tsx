@@ -151,18 +151,28 @@ export function App() {
         ) : (
           <div className="min-h-screen bg-white">
             <Navigation />
-            <Hero />
+            <div id="home">
+              <Hero />
+            </div>
             <ScrollReveal width="100%">
-              <MenuSection items={menuItems} />
+              <div id="menu">
+                <MenuSection items={menuItems} />
+              </div>
             </ScrollReveal>
             <ScrollReveal width="100%">
-              <AboutSection />
+              <div id="about">
+                <AboutSection />
+              </div>
             </ScrollReveal>
             <ScrollReveal width="100%">
-              <TestimonialsSection />
+              <div id="testimonials">
+                <TestimonialsSection />
+              </div>
             </ScrollReveal>
             <ScrollReveal width="100%">
-              <SustainabilitySection />
+              <div id="sustainability">
+                <SustainabilitySection />
+              </div>
             </ScrollReveal>
             <ScrollReveal width="100%">
               <Footer />
