@@ -28,6 +28,15 @@ export function Navigation() {
 
   const handleCartClick = () => {
     dispatch({ type: 'TOGGLE_CART' });
+    setIsOpen(false); // Close mobile menu when cart is opened
+  };
+
+  const handleOrderNow = () => {
+    const menuSection = document.querySelector('#menu');
+    if (menuSection) {
+      menuSection.scrollIntoView({ behavior: 'smooth' });
+      setIsOpen(false); // Close mobile menu
+    }
   };
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -150,6 +159,37 @@ export function Navigation() {
                 {link.label}
               </a>
             ))}
+            
+            {/* New Mobile Order Now and View Menu Buttons */}
+            <div className="px-4 py-2 space-y-2">
+              <button
+                onClick={handleOrderNow}
+                className={`w-full py-2 rounded-lg transition-colors flex items-center justify-center gap-2 ${
+                  isScrolled
+                    ? 'bg-green-800 text-white hover:bg-green-700'
+                    : 'bg-white/20 text-white hover:bg-white/30'
+                }`}
+              >
+                <ShoppingBag className="w-5 h-5" />
+                Order Now
+              </button>
+              <button
+                onClick={() => {
+                  const menuSection = document.querySelector('#menu');
+                  if (menuSection) {
+                    menuSection.scrollIntoView({ behavior: 'smooth' });
+                    setIsOpen(false);
+                  }
+                }}
+                className={`w-full py-2 rounded-lg transition-colors ${
+                  isScrolled
+                    ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-white/20 text-white hover:bg-white/30'
+                }`}
+              >
+                View Menu
+              </button>
+            </div>
           </div>
         </div>
       </div>
